@@ -1,0 +1,253 @@
+.taskmanager-intro {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(90deg, #e3f2fd 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+  padding: 18px 24px;
+  margin-bottom: 2rem;
+  justify-content: flex-start;
+}
+.intro-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+  flex-shrink: 0;
+}
+.intro-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.intro-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+  width: 48px;
+  height: 48px;
+}
+.intro-text {
+  font-size: 1.15rem;
+  color: #2c3e50;
+  line-height: 1.5;
+}
+.intro-text strong {
+  font-size: 1.25rem;
+  color: #0066cc;
+  font-weight: 700;
+}
+.intro-text em {
+  color: #34495e;
+  font-style: normal;
+  font-size: 1rem;
+  display: block;
+  margin-top: 4px;
+}
+@media (max-width: 600px) {
+  .taskmanager-intro {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 10px;
+    gap: 10px;
+  }
+  .intro-image {
+    width: 56px;
+    height: 56px;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+  .intro-content {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .intro-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .intro-text {
+    font-size: 1rem;
+  }
+}
+.navbar {
+  background-color: #2c3e50 !important; /* Dark blue-grey shade */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  color: #ffffff !important; /* White text */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-brand:hover {
+  color: #ecf0f1 !important; /* Slightly lighter on hover */
+}
+
+.add-btn {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.add-btn p {
+  font-size: 1.2rem;
+  color: #34495e;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.add-btn button {
+  background-color: #2c3e50;
+  margin: 10px;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 300px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-btn button:hover {
+  background-color: #34495e;
+}
+
+button:disabled {
+  opacity: 0.5; /* Makes it look inactive */
+  cursor: not-allowed; /* Shows the ‘🚫’ cursor */
+  transform: none; /* Prevent hover scale or animations */
+  box-shadow: none; /* Remove shadows to flatten it */
+}
+
+/* Optional: make sure hover doesn’t affect disabled buttons */
+button:disabled:hover {
+  background-color: initial;
+  color: inherit;
+}
+
+/* Styles for the small input buttons/controls inside the top-right register area */
+.register-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.register-btn a {
+  text-decoration: none;
+}
+
+.register-btn input[type="submit"] {
+  background-color: #2c3e50; /* primary dark */
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.12s ease,
+    box-shadow 0.12s ease;
+  box-shadow: 0 6px 18px rgba(12, 35, 49, 0.06);
+  display: inline-block;
+}
+
+.register-btn input[type="submit"]:hover:not(:disabled) {
+  background-color: #34495e;
+  transform: translateY(-1px);
+}
+
+.register-btn input[type="submit"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.08);
+}
+
+.register-btn input[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 480px) {
+  .register-btn {
+    gap: 6px;
+  }
+
+  .register-btn input[type="submit"] {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Success message box (matches app palette and UI) */
+.success-msg {
+  position: fixed;
+  left: 18px;
+  top: 84px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* background: linear-gradient(90deg, #ffffff 0%, #f0fbff 100%); */
+  color: #0f2a36;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(12, 35, 49, 0.12);
+  border: 1px solid rgba(44, 62, 80, 0.06);
+  min-width: 220px;
+  max-width: 360px;
+  transform: translateX(-12px);
+  opacity: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+  pointer-events: none;
+  z-index: 1200;
+}
+
+.success-msg.show {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.success-msg .icon {
+  background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(12, 35, 49, 0.12);
+  flex-shrink: 0;
+}
+
+.success-msg .message {
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: #0f2a36;
+}
+
+@media (max-width: 600px) {
+  .success-msg {
+    left: 12px;
+    top: 72px;
+    min-width: 180px;
+    padding: 10px;
+  }
+  .success-msg .message {
+    font-size: 0.9rem;
+  }
+}

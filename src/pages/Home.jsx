@@ -59,9 +59,9 @@ export default function Home() {
             />
             Task Manager
           </a>
-          <a href="/">Home</a>
+          {/* <a href="/">Home</a>
           <a href="/">About</a>
-          <a href="/">Contact</a>
+          <a href="/">Contact</a> */}
           <div className="register-btn">
             {session ? (
               <Link to="/signOut">
@@ -82,7 +82,7 @@ export default function Home() {
           with our intuitive task management system. Keep track of your daily
           tasks, set priorities, and never miss a deadline.
         </p>
-        <p>This paragraph is added just for checking the Auto Deploy.</p>
+        {/* <p>This paragraph is added just for checking the Auto Deploy.</p> */}
         <button
           // onClick={() => setIsAddTask(!isAddTask)}
           onClick={addHandle}

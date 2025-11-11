@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/SigninSignup.css";
 import { useAuth } from "../Context/AuthContext";
+import { useSnackbar } from "../Context/SnackbarContext";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function SignIn() {
   const [loading, setLoading] = useState("");
   const { signInUser, signInWithGoogle, signInWithGitHub } = useAuth();
   const navigate = useNavigate();
+  const { showSnackbar } = useSnackbar();
   // console.log(session);
 
   const handleSignIn = async (e) => {
@@ -24,10 +26,13 @@ export default function SignIn() {
       });
 
       if (result.success) {
-        navigate("/");
+        showSnackbar("You’ve signed in successfully.", "success");
+        navigate("/dashboard");
       } else {
-        setError("email/password is wrong.");
+        setError("“Incorrect email or password. Please try again");
       }
+    } catch {
+      showSnackbar("Failed to Sign in!", "error");
     } finally {
       setLoading(false);
     }
@@ -44,9 +49,17 @@ export default function SignIn() {
     const res = await signInWithGoogle();
 
     if (res.success) {
-      navigate("/");
+      showSnackbar(
+        "Signed in with your Google account successfully!",
+        "success"
+      );
+      navigate("/dashboard");
     } else {
       setError("an error occured !");
+      showSnackbar(
+        "Sign-in with Google failed. Please try again or use another method",
+        "error"
+      );
     }
   };
 
@@ -54,9 +67,18 @@ export default function SignIn() {
     const res = await signInWithGitHub();
 
     if (res.success) {
-      navigate("/");
+      showSnackbar(
+        "Signed in with your GitHub account successfully!",
+        "success"
+      );
+
+      navigate("/dashboard");
     } else {
       setError("an error occured !");
+      showSnackbar(
+        "Sign-in with GitHub failed. Please try again or use another method",
+        "error"
+      );
     }
   };
 

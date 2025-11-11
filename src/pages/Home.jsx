@@ -4,6 +4,7 @@ import AddTaskForm from "../components/AddTaskForm";
 import TaskList from "../components/TaskList";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import { useSnackbar } from "../Context/SnackbarContext";
 
 export default function Home() {
   const [isAddTask, setIsAddTask] = useState(false);
@@ -13,6 +14,7 @@ export default function Home() {
   const [viewLoading, setViewLoading] = useState(false);
   const { successMsg, session, signOut } = useAuth();
   const navigate = useNavigate();
+  const { showSnackbar } = useSnackbar();
 
   const handleAddTask = (newTask) => {
     setTasks((prev) => [...prev, newTask]);
@@ -39,9 +41,14 @@ export default function Home() {
     e.preventDefault();
     try {
       await signOut();
+      showSnackbar("You’ve signed out. See you again soon!", "info");
       navigate("/");
     } catch (error) {
       console.log("Error signing out:", error.message);
+      showSnackbar(
+        "Couldn’t sign you out. Please refresh and try again.",
+        "error"
+      );
     }
   };
 
@@ -68,6 +75,7 @@ export default function Home() {
           <a className="navbar-brand" href="/">
             Contact
           </a> */}
+
           <div className="register-btn">
             {session ? (
               <Link to="/signOut">

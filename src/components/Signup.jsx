@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/SigninSignup.css";
 import { useAuth } from "../Context/AuthContext";
+import { useSnackbar } from "../Context/SnackbarContext";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const { signUpNewUser } = useAuth();
+  const { showSnackbar } = useSnackbar();
 
   // console.log(session);
   // console.log(formData.email, formData.password);
@@ -28,10 +30,19 @@ export default function Signup() {
       });
 
       if (result.success) {
-        navigate("/signin");
+        showSnackbar(
+          "Account created! Please check your inbox and confirm your email before signing in.",
+          "info"
+        );
+        navigate("/");
       } else {
         setError("an error occured!");
       }
+    } catch {
+      showSnackbar(
+        "Couldn’t create your account. Please check your details and try again.",
+        "error"
+      );
     } finally {
       setLoading(false);
     }
@@ -88,7 +99,7 @@ export default function Signup() {
         </form>
         <p className="signin-text">
           Already have an account?{" "}
-          <Link to="/signin" className="signin-link">
+          <Link to="/" className="signin-link">
             Sign In
           </Link>
         </p>

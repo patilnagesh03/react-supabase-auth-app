@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/SigninSignup.css";
 import { useAuth } from "../Context/AuthContext";
-// import { useSnackbar } from "../Context/SnackbarContext";
+import { useSnackbar } from "../Context/SnackbarContext";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const { signUpNewUser } = useAuth();
-  // const { showSnackbar } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
 
   // console.log(session);
   // console.log(formData.email, formData.password);
@@ -30,19 +30,19 @@ export default function Signup() {
       });
 
       if (result.success) {
-        // showSnackbar(
-        //   "Account created! Please check your inbox and confirm your email before signing in.",
-        //   "info"
-        // );
-        navigate("/");
+        showSnackbar(
+          "Account created! Please check your inbox and confirm your email before signing in.",
+          "info"
+        );
+        navigate("/signin");
       } else {
         setError("an error occured!");
       }
     } catch {
-      // showSnackbar(
-      //   "Couldn’t create your account. Please check your details and try again.",
-      //   "error"
-      // );
+      showSnackbar(
+        "Couldn’t create your account. Please check your details and try again.",
+        "error"
+      );
     } finally {
       setLoading(false);
     }

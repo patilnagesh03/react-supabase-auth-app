@@ -5,7 +5,7 @@ import Signin from "./components/Signin";
 // import PrivateRoute from "./components/PrivateRoute";
 
 export const router = createBrowserRouter([
-  { path: "/dashboard", element: <App /> },
+  { path: "/", element: <App /> },
   { path: "/signup", element: <Signup /> },
-  { path: "/", element: <Signin /> },
+  { path: "/signin", element: <Signin /> },
 ]);

@@ -27,7 +27,7 @@ export default function SignIn() {
 
       if (result.success) {
         showSnackbar("You’ve signed in successfully.", "success");
-        navigate("/dashboard");
+        navigate("/");
       } else {
         setError("Incorrect email or password. Please try again");
       }
@@ -49,7 +49,7 @@ export default function SignIn() {
     const res = await signInWithGoogle();
 
     if (res.success) {
-      navigate("/dashboard");
+      navigate("/");
       showSnackbar(
         "Signed in with your Google account successfully!",
         "success"
@@ -67,7 +67,7 @@ export default function SignIn() {
     const res = await signInWithGitHub();
 
     if (res.success) {
-      navigate("/dashboard");
+      navigate("/");
       showSnackbar(
         "Signed in with your GitHub account successfully!",
         "success"

@@ -28,7 +28,7 @@ export default function Home() {
       setIsAddTask(!isAddTask);
       setViewLoading(!viewLoading);
     } else {
-      navigate("/");
+      navigate("/signin");
     }
   };
 

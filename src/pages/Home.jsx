@@ -66,7 +66,7 @@ export default function Home() {
             />
             Task Manager
           </a>
-          {/* <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/">
             Home
           </a>
           <a className="navbar-brand" href="/">
@@ -74,7 +74,7 @@ export default function Home() {
           </a>
           <a className="navbar-brand" href="/">
             Contact
-          </a> */}
+          </a>
 
           <div className="register-btn">
             {session ? (
@@ -96,7 +96,7 @@ export default function Home() {
           with our intuitive task management system. Keep track of your daily
           tasks, set priorities, and never miss a deadline.
         </p>
-        {/* <p>This paragraph is added just for checking the Auto Deploy.</p> */}
+        <p>This paragraph is added just for checking the Auto Deploy.</p>
         <button
           // onClick={() => setIsAddTask(!isAddTask)}
           onClick={addHandle}

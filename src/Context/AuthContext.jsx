@@ -1,11 +1,13 @@
 import { useEffect, useState, useContext, createContext } from "react";
 import { supabase } from "../supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(undefined);
   const [successMsg, setsuccessMsg] = useState("");
+  const navigate = useNavigate();
 
   //  Sign Up
   const signUpNewUser = async ({ email, password }) => {
@@ -20,27 +22,50 @@ export const AuthContextProvider = ({ children }) => {
     }
     setsuccessMsg("Sign up successful!");
     console.log("Sign up successful:", data);
+    // console.log(data.user.user_metadata.email_varified);
     return { success: true, data };
   };
 
+  // useEffect(() => {
+  //   // Get initial session
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     console.log("Initial session:", session);
+  //     setSession(session);
+  //   });
+
+  //   // Listen for auth changes
+  //   const {
+  //     data: { subscription },
+  //   } = supabase.auth.onAuthStateChange((_event, session) => {
+  //     console.log("Auth state changed. New session:", session);
+  //     setSession(session);
+
+  //     // if (_event === "SIGNED_IN") {
+  //     //   // navigate("/dashboard");
+  //     //   // window.location.replace("/dashboard");
+  //     // }
+  //   });
+
+  //   // Cleanup subscription on unmount
+  //   return () => subscription?.unsubscribe();
+  // }, []);
+
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("Initial session:", session);
-      setSession(session);
-    });
+    // Listen for Supabase auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        console.log("Auth event:", event, "Session:", session);
+        setSession(session);
 
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("Auth state changed. New session:", session);
-      setSession(session);
-    });
+        if (event === "SIGNED_IN") {
+          navigate("/dashboard"); // redirect after OAuth login
+        }
+      }
+    );
 
-    // Cleanup subscription on unmount
-    return () => subscription?.unsubscribe();
-  }, []);
+    // Cleanup subscription
+    return () => authListener.subscription.unsubscribe();
+  }, [navigate]);
 
   // Sign In
   const signInUser = async ({ email, password }) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./styles/SigninSignup.css";
 import { useAuth } from "../Context/AuthContext";
 import { useSnackbar } from "../Context/SnackbarContext";
@@ -12,7 +12,7 @@ export default function SignIn() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const { signInUser, signInWithGoogle, signInWithGitHub } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
   // console.log(session);
 
@@ -27,7 +27,7 @@ export default function SignIn() {
 
       if (result.success) {
         showSnackbar("You’ve signed in successfully.", "success");
-        navigate("/");
+        // navigate("/");
       } else {
         setError("Incorrect email or password. Please try again");
       }
@@ -49,7 +49,7 @@ export default function SignIn() {
     const res = await signInWithGoogle();
 
     if (res.success) {
-      navigate("/");
+      // navigate("/");
       showSnackbar(
         "Signed in with your Google account successfully!",
         "success"
@@ -67,7 +67,7 @@ export default function SignIn() {
     const res = await signInWithGitHub();
 
     if (res.success) {
-      navigate("/");
+      // navigate("/");
       showSnackbar(
         "Signed in with your GitHub account successfully!",
         "success"

@@ -5,6 +5,7 @@ import TaskList from "../components/TaskList";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { useSnackbar } from "../Context/SnackbarContext";
+// import { supabase } from "../supabaseClient";
 
 export default function Home() {
   const [isAddTask, setIsAddTask] = useState(false);
@@ -15,6 +16,16 @@ export default function Home() {
   const { successMsg, session, signOut } = useAuth();
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
+
+  // const handleAddTask = async () => {
+  //   const { error } = await supabase
+  //     .from("public.tasks")
+  //     .insert({ id: 1, title: "Task 1", description: "This is task 1" });
+
+  //   if (error) {
+  //     return "An error occured", error;
+  //   }
+  // };
 
   const handleAddTask = (newTask) => {
     setTasks((prev) => [...prev, newTask]);
@@ -41,8 +52,8 @@ export default function Home() {
     e.preventDefault();
     try {
       await signOut();
-      showSnackbar("You’ve signed out. See you again soon!", "info");
-      navigate("/signin");
+      showSnackbar("You’ve signed out. See you again soon!", "success");
+      navigate("/");
     } catch (error) {
       console.log("Error signing out:", error.message);
       showSnackbar(
@@ -66,7 +77,7 @@ export default function Home() {
             />
             Task Manager
           </a>
-          <a className="navbar-brand" href="/">
+          {/* <a className="navbar-brand" href="/">
             Home
           </a>
           <a className="navbar-brand" href="/">
@@ -74,13 +85,34 @@ export default function Home() {
           </a>
           <a className="navbar-brand" href="/">
             Contact
-          </a>
+          </a> */}
 
           <div className="register-btn">
             {session ? (
-              <Link to="/signOut">
-                <input type="submit" onClick={handleSignOut} value="Sign Out" />
-              </Link>
+              // <Link to="/signOut">
+              //   <input type="submit" onClick={handleSignOut} value="Sign Out" />
+              // </Link>
+              <div className="dropdown">
+                <button
+                  className="btn dropdown-toggle text-white fw-semibold"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Profile
+                </button>
+
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li className="dropdown-item-text">{session?.user?.email}</li>
+                  <li className="dropdown-item-text"></li>
+
+                  <li>
+                    <button className="dropdown-item " onClick={handleSignOut}>
+                      Sign Out
+                    </button>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <Link to="/signin">
                 <input type="submit" value="Sign In" />
@@ -96,7 +128,7 @@ export default function Home() {
           with our intuitive task management system. Keep track of your daily
           tasks, set priorities, and never miss a deadline.
         </p>
-        <p>This paragraph is added just for checking the Auto Deploy.</p>
+        {/* <p>This paragraph is added just for checking the Auto Deploy.</p> */}
         <button
           // onClick={() => setIsAddTask(!isAddTask)}
           onClick={addHandle}

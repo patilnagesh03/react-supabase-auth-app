@@ -32,9 +32,9 @@ export default function Signup() {
       if (result.success) {
         showSnackbar(
           "Account created! Please check your inbox and confirm your email before signing in.",
-          "info"
+          "success"
         );
-        navigate("/signin");
+        navigate("/");
       } else {
         setError("an error occured!");
       }
@@ -99,7 +99,7 @@ export default function Signup() {
         </form>
         <p className="signin-text">
           Already have an account?{" "}
-          <Link to="/" className="signin-link">
+          <Link to="/signin" className="signin-link">
             Sign In
           </Link>
         </p>
